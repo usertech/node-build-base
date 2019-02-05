@@ -22,6 +22,10 @@ RUN apk add --update \
  zlib-dev \
  zlib \
  ca-certificates \
+ python \
+ py-pip \
+ groff \
+ && pip install --upgrade awscli \
  && update-ca-certificates \
  && rm -rf /var/cache/apk/*
 
