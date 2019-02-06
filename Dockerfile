@@ -1,7 +1,10 @@
 FROM alpine
 
-RUN apk add --update \
- autoconf \
+RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+ echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+ apk update && apk upgrade 
+
+RUN apk add autoconf \
  automake \
  bash \
  build-base \
@@ -24,10 +27,17 @@ RUN apk add --update \
  ca-certificates \
  python \
  py-pip \
- groff \
- && pip install --upgrade awscli \
- && update-ca-certificates \
- && rm -rf /var/cache/apk/*
+ groff && \
+ apk add --no-cache \
+ chromium@edge \
+ nss@edge \
+ harfbuzz@edge && \
+ pip install --upgrade awscli && \
+ update-ca-certificates && \
+ rm -rf /var/cache/apk/* && \
+ yarn add puppeteer@1.9.0
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 ENV NODE_PATH /usr/lib/node_modules
 
