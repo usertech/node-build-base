@@ -4,7 +4,7 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
  echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
  apk update && apk upgrade 
 
-RUN apk add autoconf \
+RUN apk add --no-cache autoconf \
  automake \
  bash \
  build-base \
@@ -34,6 +34,7 @@ RUN apk add autoconf \
  harfbuzz@edge && \
  pip install --upgrade awscli && \
  update-ca-certificates && \
+ apk add --no-cache openssh git && \
  rm -rf /var/cache/apk/* && \
  yarn add puppeteer@1.9.0
 
