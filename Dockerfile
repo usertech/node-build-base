@@ -25,6 +25,8 @@ RUN apk add --update \
  python \
  py-pip \
  groff \
+ git \
+ openssh \
  && pip install --upgrade awscli \
  && update-ca-certificates \
  && rm -rf /var/cache/apk/*
